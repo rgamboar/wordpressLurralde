@@ -4,7 +4,7 @@
  *
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
- * @version     3.1.0
+ * @version     3.3.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

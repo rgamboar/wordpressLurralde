@@ -20,14 +20,14 @@
 	   				<?php kadence_next_post_link_plus( array('order_by' => 'menu_order', 'loop' => true, 'format' => '%link', 'link' => '<i class="icon-chevron-right"></i>') ); ?>
 	   				<span>&nbsp;</span>
    				</div>
-			<h1 class="entry-title"><?php the_title(); ?></h1>
+			<h1 class="entry-title" itemprop="name headline"><?php the_title(); ?></h1>
 			</div>
 		</div><!--container-->
 </div><!--titleclass-->
 <?php do_action( 'kadence_single_portfolio_before' ); ?>
 <div id="content" class="container">
     <div class="row">
-      <div class="main <?php echo esc_attr( virtue_main_class() ); ?> portfolio-single" role="main">
+      <div class="main <?php echo esc_attr( virtue_main_class() ); ?> portfolio-single" role="main" itemscope itemtype="http://schema.org/CreativeWork">
       <?php while (have_posts()) : the_post(); ?>
       <?php 
       	$layout 	= get_post_meta( $post->ID, '_kad_ppost_layout', true ); 
@@ -89,7 +89,11 @@
 												$img = virtue_get_image_array( $slidewidth, $slideheight, true, null, null, $attachment, false );
 												$caption = get_post($attachment)->post_excerpt;
 
-												echo '<li><a href="'.esc_url( $img[ 'full' ] ).'" data-rel="lightbox" title="'.esc_attr( $caption ).'"><img src="'.esc_url( $img[ 'src' ] ).'" width="'.esc_attr( $img[ 'width' ] ).'" height="'.esc_attr( $img[ 'height' ] ).'" '.wp_kses_post( $img[ 'srcset' ] ).' alt="'.esc_attr( $img[ 'alt' ] ).'"/></a></li>';
+												echo '<li><a href="'.esc_url( $img[ 'full' ] ).'" data-rel="lightbox" title="'.esc_attr( $caption ).'" itemprop="image" itemscope itemtype="https://schema.org/ImageObject"><img src="'.esc_url( $img[ 'src' ] ).'" width="'.esc_attr( $img[ 'width' ] ).'" height="'.esc_attr( $img[ 'height' ] ).'" '.wp_kses_post( $img[ 'srcset' ] ).' alt="'.esc_attr( $img[ 'alt' ] ).'"/>';
+														echo '<meta itemprop="url" content="'.esc_url( $img['src'] ).'">';
+														echo '<meta itemprop="width" content="'.esc_attr( $img['width'] ).'">';
+														echo '<meta itemprop="height" content="'.esc_attr( $img['height'] ).'">';
+													echo '</a></li>';
 											}
 										}
                     			} else {
@@ -119,8 +123,11 @@
 											$img = virtue_get_image_array( null, $slideheight, false, null, null, $attachment, false );
 											echo '<div class="carousel_gallery_item" style="float:left; display: table; position: relative; text-align: center; margin: 0; width:auto; height:'.esc_attr( $img[ 'height' ] ).'px;">';
 												echo '<div class="carousel_gallery_item_inner" style="vertical-align: middle; display: table-cell;">';
-													echo '<a href="'.esc_url( $img[ 'full' ] ).'" data-rel="lightbox" title="'.esc_attr( $caption ).'">';
+													echo '<a href="'.esc_url( $img[ 'full' ] ).'" data-rel="lightbox" title="'.esc_attr( $caption ).'" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">';
 														echo '<img src="'.esc_url( $img[ 'src' ] ).'" width="'.esc_attr( $img[ 'width' ] ).'" height="'.esc_attr( $img[ 'height' ] ).'" '.wp_kses_post( $img[ 'srcset' ] ).'  />';
+														echo '<meta itemprop="url" content="'.esc_url( $img['src'] ).'">';
+														echo '<meta itemprop="width" content="'.esc_attr( $img['width'] ).'">';
+														echo '<meta itemprop="height" content="'.esc_attr( $img['height'] ).'">';
 													echo '</a>'; 
 												echo '</div>';
 											echo '</div>';
@@ -158,6 +165,14 @@
 					);
 
 					echo do_shortcode( wp_kses( get_post_meta( $post->ID, '_kad_post_video', true ), $allowed_tags ) );
+					if (has_post_thumbnail( $post->ID ) ) { 
+						$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' ); ?>
+						<div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+							<meta itemprop="url" content="<?php echo esc_url( $image[0] ); ?>">
+							<meta itemprop="width" content="<?php echo esc_attr( $image[1] )?>">
+							<meta itemprop="height" content="<?php echo esc_attr( $image[2] )?>">
+						</div>
+					<?php }
                   	?>
                   </div>
 				<?php 
@@ -169,8 +184,13 @@
 						$img = virtue_get_image_array( $slidewidth, $slideheight, true, null, null, $image_id, false );
 						?>
 						<div class="imghoverclass">
-							<a href="<?php echo esc_url( $img[ 'full' ] ); ?>" data-rel="lightbox" class="lightboxhover">
+							<a href="<?php echo esc_url( $img[ 'full' ] ); ?>" data-rel="lightbox" class="lightboxhover" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
 								<img src="<?php echo esc_url( $img[ 'src' ] ); ?>" width="<?php echo esc_attr( $img[ 'width' ] ); ?>" height="<?php echo esc_attr( $img[ 'height' ] ); ?>" <?php echo wp_kses_post( $img[ 'srcset' ] ); ?> alt="<?php echo esc_attr( get_post( $image_id )->post_excerpt ); ?>" />
+								<?php 
+								echo '<meta itemprop="url" content="'.esc_url( $img['src'] ).'">';
+								echo '<meta itemprop="width" content="'.esc_attr( $img['width'] ).'">';
+								echo '<meta itemprop="height" content="'.esc_attr( $img['height'] ).'">';
+								?>
 							</a>
 						</div>
 				<?php } 
@@ -178,7 +198,7 @@
 				do_action( 'kadence_single_portfolio_after_feature' ); ?>
         </div><!--imgclass -->
   		<div class="<?php echo esc_attr( $textclass ); ?>">
-		    <div class="entry-content <?php echo esc_attr( $entryclass ); ?> <?php echo esc_attr( $portfolio_margin ); ?>">
+		    <div class="entry-content <?php echo esc_attr( $entryclass ); ?> <?php echo esc_attr( $portfolio_margin ); ?>" itemprop="text">
 		    <?php 
 		      	do_action( 'kadence_single_portfolio_before_content' );
 					the_content(); 

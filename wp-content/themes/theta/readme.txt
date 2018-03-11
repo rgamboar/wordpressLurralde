@@ -67,7 +67,14 @@ Images used are released under the CC0 license
 1. https://pixabay.com/en/laptop-iphone-coffee-notebook-pen-1478822/
 
 
-=== Changelog ===	
+=== Changelog ===
+=Version: 1.3.1  =
+1.Rearrange the top nav bar(Including display on mobile devices)
+2.Fix theme color error.(theta-config.php theme_color and fuction.php)
+3.Fix a full-size semicolon in style.css
+4.Adjust goto top display on mobile devices
+
+	
 =Version: 1.2.1  =
 * add pro.
 

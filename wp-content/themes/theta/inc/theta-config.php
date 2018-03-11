@@ -75,26 +75,20 @@ config_kirki_add_field(
 		'priority'    => 10,
 		 'output'      => array(
 			array(
-				'element'  => '.theme-color,a:hover,.nav-wrap ul.menu > li.menu-item-has-children:hover:after,#search-toggle a.search-icon:hover, #search-toggle a.search-icon:focus,.mobile-nav-ico,.service_content_image a i.fa,.ct_team_bookmarks a,.tool-content-2 ul li i.fa,#footer a:hover,.service_content_image a:hover i.fa,.breadcrumb a:hover,.comment-reply-link, .form-submit input,.comment-reply-link,#gotoTop, .bttn,.ct_price_box,.ct_pricing_best .ct_pricing_plan i.fa',
+				'element'  => '.theme-color,a:hover,.nav-wrap ul.menu > li.menu-item-has-children:hover:after,#search-toggle a.search-icon:hover, #search-toggle a.search-icon:focus,.mobile-nav-ico,.service_content_image a i.fa,.ct_team_bookmarks a,.tool-content-2 ul li i.fa,#footer a:hover,.service_content_image a:hover i.fa,.breadcrumb a:hover,.comment-reply-link, .form-submit input,.comment-reply-link,#gotoTop, .bttn,.ct_price_box,.ct_pricing_best .ct_pricing_plan i.fa,header .header-wrap .theta-menu ul.menu li a:hover',
 				'property' => 'color',
 	
 			),
 			array(
-				'element'  => '.theme-border-color,.nav-wrap ul li:hover > ul,section.ct_section_2 .feature_content_image a i,.ct_team_bookmarks a,.content-area h1#p-title,.comment-reply-link, .form-submit input,body .main-body #searchform,.page-nav-default span.current,#gotoTop,.bttn,.ct_price_box',
+				'element'  => '.theme-border-color,.nav-wrap ul li:hover > ul,section.ct_section_2 .feature_content_image a i,.ct_team_bookmarks a,.content-area h1#p-title,.comment-reply-link, .form-submit input,body .main-body #searchform,.page-nav-default span.current,#gotoTop,.bttn,.ct_price_box,header .header-wrap .theta-menu ul.menu li:hover',
 				'property' => 'border-color',
 			),
 			array(
-				'element'  => '.theme-background-color,.fhr,section.ct_section_2 .feature_content_image a i,.ct_team_bookmarks a:hover,.ct_tool_row hr,body .main-body #searchform #searchsubmit,.page-nav-default span.current,#gotoTop.hover,.bttn:hover,.bttn:active,.ct_panel_grid:hover .ct_price_box',
+				'element'  => '.theme-background-color,.fhr,section.ct_section_2 .feature_content_image a i,.ct_team_bookmarks a:hover,.ct_tool_row hr,body .main-body #searchform #searchsubmit,.page-nav-default span.current,#gotoTop.hover,.bttn:hover,.bttn:active,.ct_panel_grid:hover .ct_price_box,section.ct_section_7 .ct_testimonials_text, section.ct_testimonials .rangle_r',
 				'property' => 'background-color',
 			),
 		 ), 	
-		/*'required'	 => array(
-			  array(
-				  'setting'	 => 'theme_color_select',
-				  'operator'	 => '==',
-				  'value'		 => 'red',
-			  ),
-		)*/
+
 	)
 );
 //==========themes color end ==========  

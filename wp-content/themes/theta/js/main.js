@@ -98,6 +98,11 @@
 		
 		$('#theta-menu ul.menu span').clone().attr('id','theta-mobile-menu').removeClass().attr('class','theta-mobile-menu').appendTo( $("#theta-menu ul.menu-mobile") );
 		
+		 var bigContainer = document.querySelectorAll("#theta-mobile-menu>li");  
+            for(var i=bigContainer.length-1;i>-1;i--){  
+                document.querySelector("#theta-mobile-menu").appendChild(bigContainer[i]);  
+            } 
+					
 		$(".menu-icon").click(function(){
 			$(".theta-menu .menu-icon .icon-close").toggle();
 			$(".theta-menu .menu-icon .icon-menu").toggle();

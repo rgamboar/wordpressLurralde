@@ -24,8 +24,18 @@
  * @since Theta 1.0
  */
 
-
 define( 'THETA_VERSION', '1.3.0' );
+if ( !class_exists( 'Mobile_Detect' ) ) {	
+	get_template_part('/inc/Mobile_Detect');
+}
+
+$detect = new Mobile_Detect;	
+
+if ( $detect->isMobile() ) {
+	
+	define( 'ISMOBILE', true );
+}
+
 
 function theta_setup(){
 	global $content_width;
@@ -118,7 +128,6 @@ function theta_custom_scripts()
 		
 	$arry3 = apply_filters( 'css_filter_array', array('bootstrap') );	
 	wp_enqueue_style('theta-style', get_stylesheet_uri(),$arry3, $theme_info->get( 'Version' ), false );	
-
 			
 	wp_enqueue_style(
 		'theta-custom-style',
@@ -169,7 +178,7 @@ function theta_custom_scripts()
 	 }else{
 		$custom_css .= "@media screen and (max-width:1025px){
 			.blog-description{ display:none;}
-			.theta-logo-text{ margin-top:10px;}	
+			.theta-logo-text{ margin-top:5px;}	
 		}";
 		
 	}
@@ -235,24 +244,17 @@ function theta_custom_scripts()
 		$custom_css .= '.blog-article-content{ margin-top:25px;}';
     }
 	
-	if ( !class_exists( 'Mobile_Detect' ) ) {	
-		get_template_part('/inc/Mobile_Detect');
-	}
-	
-	$detect = new Mobile_Detect;	
-	
-	if ( $detect->isMobile() ) {
+	if ( defined( 'ISMOBILE' ) && ISMOBILE ) {
 		$custom_css .='
 			header.changeh #theta-top-search{ margin-top:-2px;}	
-			/*header.fixed{	position: inherit;}*/
 			header.fixed .warp {
 				padding-top: 0px;
 			}
 		
 			.header-wrap{ width: auto;}
 			.theta-menu .menu-icon{
-				color:#F55145;
-				border:#F55145 1px solid;
+				color:'.$color.';
+				border:'.$color.' 1px solid;
 				background:transparent;
 				cursor:pointer;
 				outline:none;
@@ -262,7 +264,7 @@ function theta_custom_scripts()
 				border-radius:3px;
 			}	
 			.theta-menu .menu-icon .icon-menu{font-size:24px; }
-			.theta-menu .menu-icon:hover{background-color: rgba(245,81,69,0.1);}
+			.theta-menu .menu-icon:hover{background-color: rgba('.$color_rbg[0].','.$color_rbg[1].','.$color_rbg[2].',0.1);}
 				
 			.theta-menu .menu-icon i{-webkit-transition:all ease 0.4s;-moz-transition:all ease 0.4s;-o-transition:all ease 0.4s;transition:all ease 0.4s}
 			
@@ -285,19 +287,17 @@ function theta_custom_scripts()
 			padding-top: 18px;
 			margin-right:5px;
 			}	
-			#header a{color: #F55145;}
+			#header a{color:'.$color.';}
 			.ct_video a.btn{   margin: 10px 15px 0 15px;}
 			.ct_testimonials_list {   padding-bottom: 80px;}
 			.ct_testimonials_text h1 {   padding-top: 100px;}	
 			
-.single-content {
-
-    float: none;
-    padding-right: 0px;
-    border:none;
-}			
-			
-					
+			.single-content {
+				float: none;
+				padding-right: 0px;
+				border:none;
+			}			
+			#gotoTop {   bottom: 50px;   margin-right: 20px;}
 		';
 	}	
 	
